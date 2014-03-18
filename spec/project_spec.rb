@@ -15,7 +15,12 @@ describe 'Project' do
 
     expect(TM::Project.id).not_to be_empty
   end
+  xit "can retrieve a list of all completed task by creation date" do
+    project1=TM::Project.new("newtask")
 
+
+
+  end
 
 
 end
