@@ -33,7 +33,12 @@ describe 'Task' do
     expect(task1.complete_time).to eq(completed_time)
   end
 
-  xit "can mark task complete, specify by id" do
+  it "can mark task complete, specify by id" do
+
+    project=TM::Project.new("hello")
+    task1=TM::Task.new("roadtrip","001", TM::Project.id)
+
+    expect(task1.complete).to eq([TM::Project.id, "yes"])
   end
 
 end

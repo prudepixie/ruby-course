@@ -15,6 +15,6 @@ class TM::Task
 
     def complete
       @task_complete[1]="yes"
-
+      @task_complete
     end
 end

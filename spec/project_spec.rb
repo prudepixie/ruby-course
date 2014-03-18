@@ -15,9 +15,17 @@ describe 'Project' do
 
     expect(TM::Project.id).not_to be_empty
   end
-  xit "can retrieve a list of all completed task by creation date" do
+  it "can retrieve a list of all completed task" do
     project1=TM::Project.new("newtask")
+    doll=TM::Task.new("roadtrip","001", 543)
 
+
+    #project2=TM::Project.new("anothertask")
+    #goldy=TM::Task.new("fever","002", 234)
+    expect(doll.complete).to eq([543, "yes"])
+
+
+    expect(project1.completed_tasks(doll)).to eq([543,"yes"])
 
 
   end
