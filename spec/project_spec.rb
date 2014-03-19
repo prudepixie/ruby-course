@@ -28,8 +28,15 @@ describe 'Project' do
 
      xfiles.completed_task_list(cheese)
      expect(xfiles.list).to eq([cheese])
-
-
-
   end
+
+  it "retrieve list of incompleted task sorted by priority num"do
+    x_time=Time.now
+     Time.stub(:now).and_return(x_time)
+     xfiles=TM::Project.new("xfiles")
+     cheese=TM::Task.new("stringy", 001, xfiles.id)
+
+     xfiles.incomplete_task_list(cheese)
+     expect(xfiles.list2).to eq([cheese])
+   end
 end

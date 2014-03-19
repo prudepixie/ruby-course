@@ -21,6 +21,9 @@ class TM::Project
     end
 
   def incomplete_task_list(task)
-
+    if task.task_complete=false
+        @list2<<task
+      end
+      @list.sort_by{|x| x.priority_num}
     end
 end
