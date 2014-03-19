@@ -19,5 +19,17 @@ describe 'Project' do
      expect(xfiles.id).to eq(2)
   end
 
+  it "retrieve list of completed task sorted by created date"do
+     x_time=Time.now
+     Time.stub(:now).and_return(x_time)
+     xfiles=TM::Project.new("xfiles")
+     cheese=TM::Task.new("stringy", 001, xfiles.id)
+     cheese.complete_task
 
+     xfiles.completed_task_list(cheese)
+     expect(xfiles.list).to eq([cheese])
+
+
+
+  end
 end
