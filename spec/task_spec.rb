@@ -10,6 +10,14 @@ describe 'Task' do
 
     expect(cheese.description).to eq("stringy")
     expect(cheese.project_id).to eq(3)
-
   end
+
+  it "marks task as complete by its id"do
+    xfiles=TM::Project.new("xfiles")
+    cheese=TM::Task.new("stringy", 001, xfiles.id)
+    cheese.complete_task
+
+    expect(cheese.task_complete).to eq(true)
+  end
+
 end

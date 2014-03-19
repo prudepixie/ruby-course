@@ -7,6 +7,12 @@ class TM::Task
     @description=description
     @priority_num=priority_num
     @project_id=project_id
+    @task_complete=false
+  end
+
+  def complete_task
+    @task_complete=true
 
   end
+
 end

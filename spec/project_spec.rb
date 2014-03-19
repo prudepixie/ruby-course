@@ -17,7 +17,6 @@ describe 'Project' do
 
      yfiles=TM::Project.new("yfiles")
      expect(xfiles.id).to eq(2)
-     #expect(TM::Project.id).not_to be_empty
   end
 
 
