@@ -1,14 +1,14 @@
 
 class TM::Project
-
+  @@id=0
   attr_accessor :name
   def initialize (name)
     @name=name
-    @@id=(0...8).map{(65+rand(26)).chr}.join
+    @id=@@id+=1
   end
 
 
-  def self.id
+  def id
     @@id
   end
 

@@ -13,9 +13,11 @@ describe 'Project' do
 
   it "automatically generate and assign new project with unique id" do
      xfiles=TM::Project.new("xfiles")
-     id=(0...8).map{(65+rand(26)).chr}.join
+     expect(xfiles.id).to eq(2)
 
-     expect(TM::Project.id).not_to be_empty
+     yfiles=TM::Project.new("yfiles")
+     expect(xfiles.id).to eq(3)
+     #expect(TM::Project.id).not_to be_empty
   end
 
 
