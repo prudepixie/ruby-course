@@ -13,10 +13,10 @@ describe 'Project' do
 
   it "automatically generate and assign new project with unique id" do
      xfiles=TM::Project.new("xfiles")
-     expect(xfiles.id).to eq(2)
+     expect(xfiles.id).to eq(1)
 
      yfiles=TM::Project.new("yfiles")
-     expect(xfiles.id).to eq(3)
+     expect(xfiles.id).to eq(2)
      #expect(TM::Project.id).not_to be_empty
   end
 

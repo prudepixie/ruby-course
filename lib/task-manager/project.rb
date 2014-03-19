@@ -1,6 +1,6 @@
 
 class TM::Project
-  @@id=0
+  @@id=-1
   attr_accessor :name
   def initialize (name)
     @name=name
