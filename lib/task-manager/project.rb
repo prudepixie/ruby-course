@@ -3,15 +3,10 @@ class TM::Project
   @@id=-1
   @@list=[]
   @@list2=[]
-  attr_accessor :name, :task_complete, :list, :list2
+  attr_accessor :name, :task_complete, :list, :list2, :id
   def initialize (name)
     @name=name
     @id=@@id+=1
-
-  end
-
-  def id
-    @@id
   end
 
   def self.completed_task_list(task)

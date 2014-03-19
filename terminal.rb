@@ -3,7 +3,7 @@ require './lib/task-manager.rb'
 require 'io/console'
 
 class Terminal_Client
-
+  attr_accessor :name
   def initialize
     show_help
 
@@ -16,13 +16,15 @@ class Terminal_Client
         show_help
       # Look at input to see what user wants to do
     end
+      if input.include?("create")
+        @name = input.gsub(/create/, "")
+        create
+      end
+
       if input == "list"
-        #list all projects
         list
       end
     end
-
-
   end
 
   def show_help
@@ -39,8 +41,12 @@ class Terminal_Client
     puts "  exit - Finish"
   end
 
+  def create
+    TM::Project_list.add_project(TM::Project.new(@name))
+  end
+
   def list
-    puts
+    TM::Project_list.project_list
 
   end
 end
