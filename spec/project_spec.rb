@@ -1,43 +1,62 @@
 require 'spec_helper'
 
 describe 'Project' do
-
   it "exists" do
     expect(TM::Project).to be_a(Class)
   end
 
-  it "can create new project with name" do
-    xfiles=TM::Project.new("xfiles")
-    expect(xfiles.name).to eq("xfiles")
+  it "can be initialized with a name" do
+  	project = TM::Project.new("project")
+ 	expect(project.name).to eq("project")
+
   end
 
-  it "automatically generate and assign new project with unique id" do
-     xfiles=TM::Project.new("xfiles")
-     expect(xfiles.id).to eq(1)
+  it "upon initialization, it can generate a unique id" do   
+  	project = TM::Project.new("project")
+  	expect(project.id).to eq(3)
 
-     yfiles=TM::Project.new("yfiles")
-     expect(xfiles.id).to eq(2)
+  	project2 = TM::Project.new('project2')
+  	expect(project2.id).to eq(4)
+
   end
 
-  it "retrieve list of completed task sorted by created date"do
-     x_time=Time.now
-     Time.stub(:now).and_return(x_time)
-     xfiles=TM::Project.new("xfiles")
-     cheese=TM::Task.new("stringy", 001, xfiles.id)
-     cheese.complete_task
+  it "returns a list of all completed tasks, by date" do
+  	current_time = Time.now
+  	project = TM::Project.new('project')
+  	
+  	Time.stub(:now).and_return(current_time - 60)
+  	task2 = TM::Task.new('red', 2, project.id)
+  	task2.complete_task
+  	project.complete_task_list(task2)
 
-     TM::Project.completed_task_list(cheese)
-     #must use created method to retrieve the list
-     expect(TM::Project.complete_task_list).to eq([cheese])
+  	Time.stub(:now).and_return(current_time)
+  	task = TM::Task.new('red', 2, project.id)
+  	task.complete_task
+  	project.complete_task_list(task)
+
+  	
+
+  	expect(project.completed_tasks_list).to eq([task2, task])
+
+ 
   end
 
-  it "retrieve list of incompleted task sorted by priority num"do
-     x_time=Time.now
-     Time.stub(:now).and_return(x_time)
-     xfiles=TM::Project.new("xfiles")
-     cheese=TM::Task.new("stringy", 001, xfiles.id)
+  it "returns a list of all incomplete tasks" do
+  	current_time = Time.now
+  	Time.stub(:now).and_return(current_time)
+  	project = TM::Project.new('project')
+  	task = TM::Task.new('red',2,project.id)
 
-     TM::Project.incompleted_task_list(cheese)
-     expect(TM::Project.incomplete_task_list).to eq([cheese])
+  	project.add_task(task)
+  	expect(project.incompleted_tasks_list).to eq([task])
+
+  	time = Time.parse('3pm')
+  	Time.stub(:now).and_return(time)
+  	task2 = TM::Task.new('red',2,project.id)
+
+  	project.add_task(task2)
+  	expect(project.incompleted_tasks_list).to eq([task,task2])
+
    end
 end
+
